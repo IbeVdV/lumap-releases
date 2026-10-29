@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Lumap</title>
+<meta name="description" content="How Lumap and this site handle personal data.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">Lumap</a>
+  <nav><a href="./#download">Download</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="legal.html">Legal notice</a></nav>
+</div></header>
+
+<main class="wrap"><article>
+<h1>Privacy</h1>
+<p class="muted small">Last updated: 29 October 2026</p>
+<p class="lead">Short version: Lumap has no account, no tracking and no telemetry. Your shows stay on your computer. The few times it talks to the internet are listed below, and you can switch them off.</p>
+
+<h2>Who is responsible</h2>
+<p>Ibe Van de Veire, the publisher of Lumap, is the controller for the processing described here. See the <a href="legal.html">legal notice</a> for contact details.</p>
+
+<h2>This website</h2>
+<p>This site is static and hosted by GitHub Pages; downloads are served from GitHub Releases. The site sets no cookies, has no analytics, no advertising and no embedded third-party content. When you visit it, GitHub, Inc. processes technical data such as your IP address, browser and the pages requested, to deliver and secure the service. That processing is GitHub's, under the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>. We do not receive visitor logs from GitHub.</p>
+
+<h2>The Lumap app</h2>
+<p>Lumap runs on your computer. Show files, fixture profiles, rig layouts and settings are stored locally and are never uploaded by Lumap. There is no user account, no usage statistics and no crash reporting.</p>
+<h3>Update check</h3>
+<p>When Lumap starts it fetches one small file from this site (<code>updates/stable.json</code> or <code>updates/beta.json</code>) to see whether a newer version exists, and when you choose to install one it downloads it from GitHub. Like any web request this reveals your IP address and app version to GitHub. Nothing about you or your shows is sent. You can turn the automatic check off under <em>Setup → Updates</em>.</p>
+<h3>AI effects (optional)</h3>
+<p>Describing an effect in words is off until you enter your own API key for an AI service (Groq by default, or another service you configure). When you press <em>Create</em>, Lumap sends your sentence and a short description of your rig (fixture names, groups, marks and positions) directly to that service, under your own account with it. That service's privacy policy applies; for Groq see <a href="https://groq.com/privacy-policy/">groq.com/privacy-policy</a>. The key is stored only on your computer, never in show files.</p>
+<h3>Phone remote and scanner</h3>
+<p>The phone remote, room scanner and lamp matching run between your phone and your computer on your own network. Camera and motion data used for scanning stay on the phone and your computer; they are not sent to us or to anyone else.</p>
+<h3>Lighting networks</h3>
+<p>Lumap sends and receives Art-Net, sACN and OSC only on the networks you choose. These carry lighting data and control commands, nothing about you.</p>
+
+<h2>Contacting us</h2>
+<p>If you write to us (by e-mail or through <a href="https://github.com/IbeVdV/lumap-releases/issues">an issue on GitHub</a>), we use what you send only to answer you and to fix the problem you report. GitHub issues are public; do not post personal data there.</p>
+
+<h2>Your rights</h2>
+<p>Under the GDPR you have the right to access, correct or erase personal data about you, to restrict or object to its processing, and to data portability. Because Lumap and this site collect almost nothing, there is usually nothing held about you; ask anyway and we will answer. You may also lodge a complaint with your data protection authority.</p>
+
+<h2>Changes</h2>
+<p>If Lumap starts handling data differently, this page is updated first and the date above changes.</p>
+</article></main>
+
+<footer class="bottom"><div class="wrap">
+  <span>© 2026 Ibe Van de Veire. All rights reserved.</span>
+  <nav><a href="privacy.html">Privacy</a><a href="terms.html">Terms of use</a><a href="legal.html">Legal notice</a><a href="licenses.html">Open-source licences</a></nav>
+</div></footer>
+</body>
+</html>

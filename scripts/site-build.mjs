@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Builds the Lumap site for GitHub Pages, and moves update channels (see README.md).
 //
-//   node scripts/site-build.mjs build <out dir>     the site, with updates/<channel>.json
+//   node scripts/site-build.mjs build <out dir>     the site, with updates/<channel>.json and
+//                                                   updates/<channel>-files.json (the downloads page)
 //   node scripts/site-build.mjs set <channel> [v]   point a channel at version v (none: offer nothing)
 //
 // A channel's manifest is the `latest.json` that the release workflow attached to that version's
@@ -64,6 +65,14 @@ function manifest(version) {
   }
 }
 
+/** The installers of a published release, for the download buttons. */
+function downloads(version) {
+  const r = JSON.parse(execFileSync("gh", ["release", "view", `v${version}`, "--json", "assets,url,publishedAt"], { encoding: "utf8" }));
+  // Update archives, their signatures and the manifest are for the app, not for people.
+  const files = r.assets.filter((a) => !/\.sig$|\.tar\.gz$|\.zip$|^latest\.json$/.test(a.name)).map((a) => ({ name: a.name, size: a.size, url: a.url }));
+  return { version, date: r.publishedAt, page: r.url, files };
+}
+
 if (command === "set") {
   const [channel, version] = args;
   if (!CHANNELS.includes(channel)) throw new Error(`channel must be one of ${CHANNELS.join(", ")}`);
@@ -88,7 +97,9 @@ if (command === "set") {
   for (const c of CHANNELS) {
     if (!found[c]) continue;
     writeFileSync(join(out, "updates", `${c}.json`), `${JSON.stringify(found[c], null, 2)}\n`);
-    console.log(`updates/${c}.json → ${found[c].version}`);
+    const files = downloads(found[c].version.replace(/^v/, ""));
+    writeFileSync(join(out, "updates", `${c}-files.json`), `${JSON.stringify(files, null, 2)}\n`);
+    console.log(`updates/${c}.json → ${found[c].version} (${files.files.length} downloads)`);
   }
   if (!existsSync(join(out, ".nojekyll"))) writeFileSync(join(out, ".nojekyll"), "");
 } else {

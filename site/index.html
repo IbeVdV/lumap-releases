@@ -3,67 +3,108 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lumap — lighting that follows the room</title>
-<meta name="description" content="Lumap: spatial lighting control. Place your fixtures on a floor plan, pick an effect, play.">
-<style>
-  :root { --bg: #0b0c0f; --panel: #14161b; --border: #262a33; --text: #e8eaf0; --muted: #9aa0ad; --accent: #7b8cff; }
-  @media (prefers-color-scheme: light) { :root { --bg: #f6f7fb; --panel: #ffffff; --border: #dde0e8; --text: #15171c; --muted: #5a6070; --accent: #4757e6; } }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  main { max-width: 860px; margin: 0 auto; padding: 48px 16px 64px; }
-  h1 { font-size: 40px; margin: 0 0 8px; letter-spacing: -0.02em; }
-  h2 { margin-top: 48px; font-size: 22px; }
-  p.lead { color: var(--muted); font-size: 19px; margin: 0 0 28px; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
-  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
-  .card h3 { margin: 0 0 6px; font-size: 16px; }
-  .card .ver { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
-  a.button { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-weight: 600; margin: 4px 6px 0 0; font-size: 14px; }
-  a.button.quiet { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
-  ul { padding-left: 20px; }
-  .muted { color: var(--muted); }
-  footer { margin-top: 56px; color: var(--muted); font-size: 14px; }
-</style>
+<title>Lumap — download</title>
+<meta name="description" content="Lumap: lighting control where you barely program. Download for Windows, macOS and Linux.">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
-  <h1>Lumap</h1>
-  <p class="lead">Lighting control where you barely program. Put your fixtures on a floor plan, pick “wave left to right” or “pulse from the centre”, and play. Art-Net, sACN and USB-DMX; Windows, macOS and Linux.</p>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">Lumap</a>
+  <nav><a href="#download">Download</a><a href="#about">What it does</a><a href="https://github.com/IbeVdV/lumap-releases/releases">All releases</a></nav>
+</div></header>
+
+<main class="wrap">
+  <h1>Lighting that follows the room</h1>
+  <p class="lead">Put your fixtures on a floor plan, pick “wave left to right” or “pulse from the centre”, and play. Lumap drives Art-Net, sACN and USB-DMX from Windows, macOS and Linux.</p>
 
   <h2 id="download">Download</h2>
-  <div class="cards" id="channels">
-    <div class="card"><h3>Stable</h3><div class="ver" data-channel="stable">Loading…</div></div>
-    <div class="card"><h3>Beta</h3><div class="ver" data-channel="beta">Loading…</div></div>
+  <div class="tabs" role="tablist" aria-label="Version">
+    <button type="button" role="tab" id="tab-stable" aria-selected="false">Stable</button>
+    <button type="button" role="tab" id="tab-beta" aria-selected="false">Beta</button>
   </div>
-  <p class="muted">Lumap updates itself: <em>Setup → Updates</em> shows your version, lets you join the beta, and installs a new version when you say so — never during a show by itself.</p>
+  <div id="channel-note" class="muted small"></div>
+  <div class="oses" id="oses"><p class="muted">Loading…</p></div>
+  <p class="release-meta" id="release-meta"></p>
 
-  <h2>What it does</h2>
-  <ul>
-    <li>Effects come from where each fixture is: waves, chases and pulses across the real room.</li>
-    <li>Play page built like a console: buttons and faders on pages, soft colours and positions, priorities.</li>
-    <li>Set up a rig by clicking the lamp that lights; import from MagicQ, WolfMix, MVR or a patch CSV.</li>
-    <li>2D and 3D visualizer that can pop out to another screen.</li>
+  <div class="notice" role="note">
+    <strong>Before a show:</strong> Lumap controls real lighting, including strobes and fast flashing effects, which can trigger seizures in people with photosensitive epilepsy. Test your show in advance, warn your audience where strobes are used, and follow the safety rules of your venue. See the <a href="terms.html">terms of use</a>.
+  </div>
+
+  <p class="muted small">Lumap keeps itself up to date: <em>Setup → Updates</em> shows your version, lets you join the beta, and installs a new version only when you say so — never during a show by itself. On macOS and Windows the first start may warn about an unknown developer while the builds are not code-signed; check a download against <code>SHA256SUMS.txt</code> on its release page.</p>
+
+  <h2 id="about">What it does</h2>
+  <ul class="features">
+    <li>Effects come from where each fixture is: waves, chases and pulses that move through the real room.</li>
+    <li>A Play page built like a console: buttons and faders on pages, soft colours and positions, priorities.</li>
+    <li>Set up a rig by clicking the lamp that lights up; import patches from MagicQ, WolfMix, MVR or a CSV.</li>
+    <li>2D and 3D visualizer that can pop out to another screen; the lights keep running if the window closes.</li>
   </ul>
-
-  <footer>Lumap · <a href="https://github.com/IbeVdV/lumap-releases/releases">all releases and notes</a></footer>
 </main>
+
+<footer class="bottom"><div class="wrap">
+  <span>© 2026 Ibe Van de Veire. All rights reserved.</span>
+  <nav><a href="privacy.html">Privacy</a><a href="terms.html">Terms of use</a><a href="legal.html">Legal notice</a><a href="licenses.html">Open-source licences</a></nav>
+</div></footer>
+
 <script>
-  // What each channel offers now, from the manifests this site publishes.
-  for (const el of document.querySelectorAll("[data-channel]")) {
-    const channel = el.dataset.channel;
-    fetch(`updates/${channel}.json`, { cache: "no-store" })
-      .then((r) => (r.ok ? r.json() : Promise.reject()))
-      .then((m) => {
-        const v = String(m.version).replace(/^v/, "");
-        const tag = `v${v}`;
-        el.innerHTML = "";
-        el.append(`Version ${v}`);
-        const links = document.createElement("div");
-        links.innerHTML = `<a class="button" href="https://github.com/IbeVdV/lumap-releases/releases/tag/${tag}">Downloads</a>`;
-        el.after(links);
-      })
-      .catch(() => (el.textContent = "Nothing offered on this channel yet."));
+  // The downloads of the version each channel offers (updates/<channel>-files.json, written by the
+  // site build from the release the channel points at).
+  const OS = [
+    { id: "windows", name: "Windows", note: "Windows 10 and 11, 64-bit", files: [[/_x64-setup\.exe$/, "Installer (.exe)"], [/\.msi$/, "MSI package"]] },
+    { id: "mac-arm", name: "macOS · Apple silicon", note: "M1 and newer, macOS 11+", files: [[/_aarch64\.dmg$/, "Disk image (.dmg)"]] },
+    { id: "mac-intel", name: "macOS · Intel", note: "Intel Macs, macOS 11+", files: [[/_x64\.dmg$/, "Disk image (.dmg)"]] },
+    { id: "linux", name: "Linux", note: "64-bit; the AppImage updates itself", files: [[/\.AppImage$/, "AppImage"], [/\.deb$/, "Debian / Ubuntu (.deb)"], [/\.rpm$/, "Fedora / openSUSE (.rpm)"]] },
+  ];
+  const ua = navigator.userAgent;
+  // A browser does not tell Apple silicon from Intel: both Mac cards are marked.
+  const yours = /Windows/.test(ua) ? "windows" : /Mac/.test(ua) ? "mac" : /Linux|X11/.test(ua) && !/Android/.test(ua) ? "linux" : null;
+  const mb = (n) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
+  const get = (path) => fetch(path, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const channels = {};
+
+  function show(channel) {
+    for (const c of ["stable", "beta"]) document.getElementById(`tab-${c}`).setAttribute("aria-selected", String(c === channel));
+    const offer = channels[channel];
+    const box = document.getElementById("oses");
+    const meta = document.getElementById("release-meta");
+    document.getElementById("channel-note").textContent = channel === "beta" ? "Beta: the newest features, for testing before a show depends on them." : "Stable: released for shows.";
+    box.innerHTML = "";
+    if (!offer) {
+      box.innerHTML = `<p class="muted">Nothing offered on this channel yet.</p>`;
+      meta.textContent = "";
+      return;
+    }
+    const mine = (os) => !!yours && os.id.startsWith(yours);
+    const order = [...OS].sort((a, b) => mine(b) - mine(a));
+    for (const os of order) {
+      const card = document.createElement("div");
+      card.className = `os${mine(os) ? " yours" : ""}`;
+      card.innerHTML = `<h3>${os.name}${mine(os) ? '<span class="tag">your system</span>' : ""}</h3><div class="muted small">${os.note}</div>`;
+      let first = true;
+      for (const [pattern, label] of os.files) {
+        const f = offer.files.find((x) => pattern.test(x.name));
+        if (!f) continue;
+        const a = document.createElement("a");
+        a.className = first ? "button" : "button quiet";
+        a.href = f.url;
+        a.innerHTML = `${label} <span class="size">· ${mb(f.size)}</span>`;
+        card.append(a);
+        first = false;
+      }
+      if (!first) box.append(card);
+    }
+    const sums = offer.files.find((x) => x.name === "SHA256SUMS.txt");
+    meta.innerHTML = `Version ${offer.version}${offer.date ? ` · ${new Date(offer.date).toLocaleDateString()}` : ""} · <a href="${offer.page}">release notes</a>${sums ? ` · <a href="${sums.url}">SHA256SUMS.txt</a>` : ""}`;
   }
+
+  Promise.all(["stable", "beta"].map((c) => get(`updates/${c}-files.json`).then((f) => (channels[c] = f)))).then(() => {
+    for (const c of ["stable", "beta"]) {
+      const tab = document.getElementById(`tab-${c}`);
+      tab.disabled = !channels[c];
+      tab.onclick = () => show(c);
+    }
+    show(channels.stable ? "stable" : "beta");
+  });
 </script>
 </body>
 </html>

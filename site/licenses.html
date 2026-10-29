@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open-source licences — Lumap</title>
+<meta name="description" content="The open-source components included in Lumap and their licences.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">Lumap</a>
+  <nav><a href="./#download">Download</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="legal.html">Legal notice</a></nav>
+</div></header>
+
+<main class="wrap"><article>
+<h1>Open-source licences</h1>
+<p class="lead">Lumap is built with open-source software. We thank its authors. Each component below is used under its licence; follow the link for the full licence text and the copyright notices.</p>
+<p class="muted small" id="summary">Loading…</p>
+<input class="filter" type="search" id="filter" placeholder="Filter by name or licence" aria-label="Filter components">
+<div style="overflow-x:auto">
+<table>
+  <thead><tr><th>Component</th><th>Version</th><th>Licence</th><th>Kind</th></tr></thead>
+  <tbody id="rows"></tbody>
+</table>
+</div>
+<p class="muted small">Also included: the fixture format of the Open Fixture Library (MIT). Where a component offers a choice of licences (“MIT OR Apache-2.0”), Lumap uses it under the first one listed. Where a licence asks for source code of a component (MPL-2.0), it is available from the component's repository linked above.</p>
+</article></main>
+
+<footer class="bottom"><div class="wrap">
+  <span>© 2026 Ibe Van de Veire. All rights reserved.</span>
+  <nav><a href="privacy.html">Privacy</a><a href="terms.html">Terms of use</a><a href="legal.html">Legal notice</a><a href="licenses.html">Open-source licences</a></nav>
+</div></footer>
+<script>
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  fetch("licenses.json").then((r) => r.json()).then((all) => {
+    const rows = document.getElementById("rows");
+    document.getElementById("summary").textContent = `${all.length} components.`;
+    const draw = (q) => {
+      q = q.trim().toLowerCase();
+      rows.innerHTML = all
+        .filter((x) => !q || `${x.name} ${x.license}`.toLowerCase().includes(q))
+        .map((x) => `<tr><td>${x.url ? `<a href="${esc(x.url)}" rel="noreferrer">${esc(x.name)}</a>` : esc(x.name)}</td><td>${esc(x.version)}</td><td class="license">${esc(x.license)}</td><td class="muted">${esc(x.kind)}</td></tr>`)
+        .join("");
+    };
+    draw("");
+    document.getElementById("filter").oninput = (e) => draw(e.target.value);
+  });
+</script>
+</body>
+</html>
