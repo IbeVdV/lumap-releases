@@ -33,14 +33,24 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # A published release runs on its tag, which may not deploy Pages: rebuild from main instead.
+  # A published release runs on its tag, which may not deploy Pages: rebuild from main instead,
+  # but only when a channel already offers that version. Otherwise nothing on the site changes,
+  # and a rebuild queued now would push out a channel move started at the same time (a
+  # concurrency group keeps one waiting run).
   from-main:
     if: github.event_name == 'release'
     runs-on: ubuntu-24.04
     steps:
       - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run pages.yml --repo "$GITHUB_REPOSITORY" --ref main
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          channels=$(gh api "repos/$GITHUB_REPOSITORY/contents/site/channels.json?ref=main" --jq .content | base64 -d)
+          if echo "$channels" | grep -q "\"${TAG#v}\""; then
+            gh workflow run pages.yml --repo "$GITHUB_REPOSITORY" --ref main
+          else
+            echo "No channel offers $TAG yet: nothing to rebuild."
+          fi
 
   build:
     if: github.event_name != 'release'
