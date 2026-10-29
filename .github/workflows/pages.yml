@@ -1,0 +1,70 @@
+# The Lumap site on GitHub Pages: the landing page and the update manifests the app checks
+# (README.md). It is rebuilt when site/ changes, when a release is published, or by hand:
+# run it with a channel and a version to point that channel at the version (it commits
+# site/channels.json for you). Nothing reaches users until a channel points at it.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", "scripts/site-build.mjs", ".github/workflows/pages.yml"]
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: "Channel to move (empty: just rebuild the site)"
+        type: choice
+        options: ["", "stable", "beta"]
+        default: ""
+      version:
+        description: "Version it offers from now on, e.g. 0.1.0-beta.8 (empty: offer nothing)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Point the channel at the version
+        if: github.event_name == 'workflow_dispatch' && inputs.channel != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHANNEL: ${{ inputs.channel }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          node scripts/site-build.mjs set "$CHANNEL" "$VERSION"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Site: the $CHANNEL channel offers ${VERSION:-nothing}"
+          git push
+      - name: Build the site
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/site-build.mjs build _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
