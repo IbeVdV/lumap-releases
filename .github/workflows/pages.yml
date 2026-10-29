@@ -26,13 +26,24 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
+  # A published release runs on its tag, which may not deploy Pages: rebuild from main instead.
+  from-main:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-24.04
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run pages.yml --repo "$GITHUB_REPOSITORY" --ref main
+
   build:
+    if: github.event_name != 'release'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
@@ -49,8 +60,12 @@ jobs:
           node scripts/site-build.mjs set "$CHANNEL" "$VERSION"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "Site: the $CHANNEL channel offers ${VERSION:-nothing}"
-          git push
+          if git diff --quiet; then
+            echo "the $CHANNEL channel already offers ${VERSION:-nothing}"
+          else
+            git commit -am "Site: the $CHANNEL channel offers ${VERSION:-nothing}"
+            git push
+          fi
       - name: Build the site
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
