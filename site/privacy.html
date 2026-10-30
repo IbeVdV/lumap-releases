@@ -15,8 +15,8 @@
 
 <main class="wrap"><article>
 <h1>Privacy</h1>
-<p class="muted small">Last updated: 29 October 2026</p>
-<p class="lead">Short version: Lumap has no account, no tracking and no telemetry. Your shows stay on your computer. The few times it talks to the internet are listed below, and you can switch them off.</p>
+<p class="muted small">Last updated: 30 October 2026</p>
+<p class="lead">Short version: Lumap has no account and no tracking. Your shows stay on your computer. It sends usage info only if you say yes. The few times it talks to the internet are listed below, and you can switch all of them off.</p>
 
 <h2>Who is responsible</h2>
 <p>Ibe Van de Veire, the publisher of Lumap, is the controller for the processing described here. Questions about privacy, or a request about your data: <a href="mailto:info@lumap.tech">info@lumap.tech</a>.</p>
@@ -25,9 +25,20 @@
 <p>This site is static and hosted by GitHub Pages; downloads are served from GitHub Releases. The site sets no cookies, has no analytics, no advertising and no embedded third-party content. When you visit it, GitHub, Inc. processes technical data such as your IP address, browser and the pages requested, to deliver and secure the service. That processing is GitHub's, under the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>. We do not receive visitor logs from GitHub.</p>
 
 <h2>The Lumap app</h2>
-<p>Lumap runs on your computer. Show files, fixture profiles, rig layouts and settings are stored locally and are never uploaded by Lumap. There is no user account, no usage statistics and no crash reporting.</p>
+<p>Lumap runs on your computer. Show files, fixture profiles, rig layouts and settings are stored locally and are never uploaded by Lumap. There is no user account and no crash reporting, and usage info is only sent if you agree to it (below).</p>
 <h3>Update check</h3>
 <p>When Lumap starts it fetches one small file from this site (<code>updates/stable.json</code> or <code>updates/beta.json</code>) to see whether a newer version exists, and when you choose to install one it downloads it from GitHub. Like any web request this reveals your IP address and app version to GitHub. Nothing about you or your shows is sent. You can turn the automatic check off under <em>Setup → Updates</em>.</p>
+<h3>Usage info (only if you say yes)</h3>
+<p>The desktop app asks once whether it may send usage info. If you say no, nothing is sent and nothing is stored for it; Lumap works exactly the same either way. If you say yes, Lumap sends this to our usage server <strong>once a day while it is open</strong>:</p>
+<ul>
+<li>a random install number, made on your computer when you said yes (to count each computer once);</li>
+<li>the Lumap version, your operating system (Windows, macOS or Linux), your language setting (e.g. <code>nl-BE</code>) and update channel (stable or beta);</li>
+<li>which version of this policy you agreed to.</li>
+</ul>
+<p>Optionally, in <em>Setup → Privacy</em>, you can add your <strong>e-mail address</strong>, so we can contact you about Lumap (questions about how you use it, beta news, and the paid version when it comes), and <strong>what you use Lumap for</strong> (mobile DJ, venue, church, theatre, rental, something else). Empty the e-mail field and it is deleted at the next check-in.</p>
+<p>Never sent: your shows, fixtures, names, files, network details, or anything else you type. <em>Setup → Privacy</em> shows exactly what is sent from your computer and what the server holds about it.</p>
+<p><strong>Why and legal basis:</strong> to know how many people use Lumap, on which versions and systems, so it can be improved and later sold. The legal basis is your consent (GDPR Art. 6(1)(a); storing the install number on your device: Art. 5(3) of the ePrivacy Directive). You can withdraw it at any time; that does not affect what was sent before.</p>
+<p><strong>Where and how long:</strong> the server runs on Cloudflare (Cloudflare, Inc.), our processor under its Data Processing Addendum; the database is stored in the EU. The server does not store your IP address and its request logs are switched off. Where Cloudflare processes data outside the EU it does so under the EU–US Data Privacy Framework and the EU Standard Contractual Clauses. An install that has not checked in for 13 months is deleted automatically; <strong>switching usage info off deletes it at once</strong> (if you are offline, as soon as Lumap is online again). Counts per day (how many installs of each version and system, without install numbers) are kept to see trends; they are not about any person. Nobody else receives the data; it is not sold or used for advertising, and no automated decisions are made about you.</p>
 <h3>AI effects (optional)</h3>
 <p>Describing an effect in words is off until you enter your own API key for an AI service (Groq by default, or another service you configure). When you press <em>Create</em>, Lumap sends your sentence and a short description of your rig (fixture names, groups, marks and positions) directly to that service, under your own account with it. That service's privacy policy applies; for Groq see <a href="https://groq.com/privacy-policy/">groq.com/privacy-policy</a>. The key is stored only on your computer, never in show files.</p>
 <h3>Phone remote and scanner</h3>
@@ -39,7 +50,7 @@
 <p>If you write to us (by e-mail to info@lumap.tech or through <a href="https://github.com/IbeVdV/lumap-releases/issues">an issue on GitHub</a>), we use what you send only to answer you and to fix the problem you report. GitHub issues are public; do not post personal data there.</p>
 
 <h2>Your rights</h2>
-<p>Under the GDPR you have the right to access, correct or erase personal data about you, to restrict or object to its processing, and to data portability. Because Lumap and this site collect almost nothing, there is usually nothing held about you; ask anyway and we will answer. You may also lodge a complaint with your data protection authority.</p>
+<p>Under the GDPR you have the right to access, correct or erase personal data about you, to restrict or object to its processing, and to data portability. For usage info you can do most of this yourself in <em>Setup → Privacy</em>: see what the server holds, or switch it off to delete it. For anything else, write to <a href="mailto:info@lumap.tech">info@lumap.tech</a> (with your install number from <em>Setup → Privacy</em>, or your e-mail address). Apart from usage info you agreed to, Lumap and this site collect almost nothing, so there is usually nothing held about you; ask anyway and we will answer. You may also lodge a complaint with the Belgian Data Protection Authority (<a href="https://www.dataprotectionauthority.be">dataprotectionauthority.be</a>) or the authority where you live.</p>
 
 <h2>Changes</h2>
 <p>If Lumap starts handling data differently, this page is updated first and the date above changes.</p>
